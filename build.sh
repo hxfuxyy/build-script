@@ -27,14 +27,6 @@ git clone -b lineage-22 https://gitlab.com/dev-harsh1998/android_vendor_xiaomi_n
 git clone -b 15.0 https://github.com/crdroidandroid/android_hardware_xiaomi hardware/xiaomi
 echo "---------------RESYNCED-----------------"
 
-# Upgrade System and install openssl
-sudo apt update && sudo apt upgrade -y
-sudo apt update && sudo apt install libc6-dev
-sudo apt install openssl libssl-dev -y && sudo apt install libssl-dev -y
-sudo apt-get install libfl-dev -y
-
-echo "-----------------SYSTEM UPGRADED-----------------"
-
 #Build Environment
 . build/envsetup.sh
 echo "---------------BUILD ENVIRONMENT------------------"
