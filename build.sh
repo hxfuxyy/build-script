@@ -29,6 +29,5 @@ git clone https://github.com/hxfuxyy/vendor_infinity vendor/infinity
 # initiate build setup
 . build/envsetup.sh
 
-
-echo "======= Export Done ======"
+echo "======= Build starting ======"
 lunch infinity_nabu-userdebug && m bacon
