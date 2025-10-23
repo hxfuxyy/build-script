@@ -1,38 +1,28 @@
 #!/bin/bash
 
-#Build Script for nabu
-#Remove files
-rm -rf .repo/local_manifests
-echo "----------------DELETED DIRECTORIES----------------"
+rm -rf .repo/local_manifests/
 
-#Initialise repos
-repo init -u https://github.com/RisingTechOSS/android -b fifteen --git-lfs
-echo "--------------REPO INITIALISED---------------"
+# repo init rom
+repo init --no-repo-verify --git-lfs -u https://github.com/ProjectInfinity-X/manifest -b 16 -g default,-mips,-darwin,-notdefault
+echo "=================="
+echo "Repo init success"
+echo "=================="
 
-#Local Manifest
-git clone https://github.com/hxfuxyy/nabu-local_manifest --depth 1 -b rising-v .repo/local_manifests
-echo "-----------------CLONED local manifest-------------------"
+# Local manifests
+git clone https://github.com/hxfuxyy/nabu-local_manifest -b Infinityx-16 .repo/local_manifests
+echo "============================"
+echo "Local manifest clone success"
+echo "============================"
 
-#Resync
+# build
 /opt/crave/resync.sh
-echo "---------------RESYNCED-----------------"
-#Build Environment
+echo "============="
+echo "Sync success"
+echo "============="
+
+# initiate build setup
 . build/envsetup.sh
-echo "---------------BUILD ENVIRONMENT------------------"
 
-#Lunch
-riseup nabu userdebug
-echo "--------------VANILLA BUILD STARTED--------------"
-rise b
 
-mv out/target/product/nabu/*.zip .
-echo "--------------MOVED VANILLA ZIPS TO ROOT DIRECTORY--------------"
-
-#Exports for Gapps Build
-export WITH_GMS=true
-export TARGET_CORE_GMS=true
-echo "--------------GAPPS BUILD STARTED--------------"
-rise b
-
-mv out/target/product/nabu/*.zip .
-echo "--------------MOVED GAPPS ZIPS TO ROOT DIRECTORY----------------"
+echo "======= Export Done ======"
+lunch infinity_nabu-userdebug && m bacon
