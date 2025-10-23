@@ -1,6 +1,7 @@
 #!/bin/bash
 
 rm -rf .repo/local_manifests/
+rm -rf .repo/repo/
 
 # repo init rom
 repo init --no-repo-verify --git-lfs -u https://github.com/ProjectInfinity-X/manifest -b 16 -g default,-mips,-darwin,-notdefault
@@ -8,19 +9,19 @@ echo "=================="
 echo "Repo init success"
 echo "=================="
 
-# Local manifests
-git clone https://github.com/hxfuxyy/nabu-local_manifest -b Infinityx-16 .repo/local_manifests
-echo "============================"
-echo "Local manifest clone success"
-echo "============================"
-
-# build
+# sync
 /opt/crave/resync.sh
 echo "============="
 echo "Sync success"
 echo "============="
 
-# remove ota updater string
+# dt
+git clone https://github.com/hxfuxyy/new_device_xiaomi_nabu device/xiaomi/nabu 
+git clone https://gitlab.com/crdroidandroid/android_vendor_xiaomi_nabu vendor/xiaomi/nabu 
+git clone https://github.com/crdroidandroid/android_kernel_xiaomi_sm8150 kernel/xiaomi/nabu
+rm -rf hardware/xiaomi 
+git clone https://github.com/Evolution-X-Devices/hardware_xiaomi hardware/xiaomi 
+git clone https://github.com/TogoFire/packages_apps_ViPER4AndroidFX packages/apps/ViPER4AndroidFX 
 rm -rf packages/apps/Updater
 git clone https://github.com/hxfuxyy/packages_apps_Updater packages/apps/Updater
 rm -rf vendor/infinity
