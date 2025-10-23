@@ -20,6 +20,12 @@ echo "============="
 echo "Sync success"
 echo "============="
 
+# remove ota updater string
+rm -rf packages/apps/Updater
+git clone https://github.com/hxfuxyy/packages_apps_Updater packages/apps/Updater
+rm -rf vendor/infinity
+git clone https://github.com/hxfuxyy/vendor_infinity vendor/infinity
+
 # initiate build setup
 . build/envsetup.sh
 
