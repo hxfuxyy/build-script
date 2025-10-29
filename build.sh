@@ -1,40 +1,23 @@
 #!/bin/bash
 
-#Build Script for nabu
-#Remove files
 rm -rf .repo/local_manifests
-echo "----------------DELETED DIRECTORIES----------------"
-
-#Initialise repos
-repo init -u https://github.com/crdroidandroid/android.git -b 15.0 --git-lfs
-echo "--------------REPO INITIALISED---------------"
-
-#Resync
+rm -rf .repo/repo
+repo init -u https://github.com/LineageOS/android.git -b lineage-23.0 --git-lfs
 /opt/crave/resync.sh
-echo "---------------RESYNCED-----------------"
-
-rm -rf packages/apps/Settings
-rm -rf device/xiaomi/nabu
-rm -rf vendor/xiaomi/nabu
-rm -rf kernel/xiaomi/nabu
+git clone https://github.com/Evolution-X-Devices/device_xiaomi_marble device/xiaomi/marble
+git clone https://github.com/Evolution-X-Devices/device_xiaomi_sm8450-common device/xiaomi/sm8450-common
+git clone https://github.com/Evolution-X-Devices/vendor_xiaomi_sm8450-common vendor/xiaomi/sm8450-common
+git clone https://github.com/Evolution-X-Devices/vendor_xiaomi_marble vendor/xiaomi/marble
 rm -rf hardware/xiaomi
-echo "----------------DELETED DIRECTORIES----------------"
-
-git clone -b 15.0 https://github.com/hxfuxyy/android_packages_apps_Settings packages/apps/Settings
-git clone -b crdroid-v https://github.com/hxfuxyy/android_device_xiaomi_nabu device/xiaomi/nabu
-git clone -b lineage-22 https://github.com/dev-harsh1998/android_kernel_xiaomi_nabu kernel/xiaomi/nabu
-git clone -b lineage-22 https://gitlab.com/dev-harsh1998/android_vendor_xiaomi_nabu vendor/xiaomi/nabu
-git clone -b 15.0 https://github.com/crdroidandroid/android_hardware_xiaomi hardware/xiaomi
-echo "---------------RESYNCED-----------------"
-
-#Build Environment
-. build/envsetup.sh
-echo "---------------BUILD ENVIRONMENT------------------"
-
-#Brunch
-echo "--------------CRDROID BUILD STARTED--------------"
-brunch nabu
-
-cp out/target/product/nabu/*.zip .
-echo "--------------MOVED VANILLA ZIPS TO ROOT DIRECTORY--------------"
+git clone https://github.com/Evolution-X-Devices/hardware_xiaomi hardware/xiaomi -b bka-no-dolby
+rm -rf hardware/dolby
+git clone https://github.com/Evolution-X-Devices/hardware_dolby -b bka-aospa
+git clone https://github.com/Evolution-X-Devices/device_xiaomi_miuicamera-marble device/xiaomi/miuicamera-marble
+git clone https://github.com/Evolution-X-Devices/vendor_xiaomi_miuicamera-marble vendor/xiaomi/miuicamera-marble
+git clone https://github.com/Evolution-X-Devices/kernel_xiaomi_sm8450 kernel/xiaomi/sm8450
+git clone https://github.com/Evolution-X-Devices/kernel_xiaomi_sm8450-devicetrees kernel/xiaomi/sm8450-devicetrees
+git clone https://github.com/LineageOS/android_kernel_xiaomi_sm8450-modules kernel/xiaomi/sm8450-modules -b lineage-22.2
+source build/envsetup.sh
+brunch marble
+cp out/target/product/marble/*.zip .
 echo "--------------BUILD SUCCESSFULLY--------------"
