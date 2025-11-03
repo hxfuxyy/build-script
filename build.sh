@@ -18,7 +18,7 @@ echo "============="
 # dt
 git clone https://github.com/hxfuxyy/new_device_xiaomi_nabu device/xiaomi/nabu 
 git clone https://gitlab.com/crdroidandroid/android_vendor_xiaomi_nabu vendor/xiaomi/nabu 
-git clone https://github.com/crdroidandroid/android_kernel_xiaomi_sm8150 kernel/xiaomi/nabu
+git clone https://github.com/hxfuxyy/android_kernel_xiaomi_sm8150 kernel/xiaomi/nabu
 rm -rf hardware/xiaomi 
 git clone https://github.com/Evolution-X-Devices/hardware_xiaomi hardware/xiaomi 
 git clone https://github.com/TogoFire/packages_apps_ViPER4AndroidFX packages/apps/ViPER4AndroidFX 
